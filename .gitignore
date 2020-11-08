@@ -1,16 +1,11 @@
 # Compiled class file
 *.class
 
-# Log file
-*.log
+# Intelij Config
+.idea/
+*.iml
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -19,5 +14,21 @@
 *.tar.gz
 *.rar
 
+# Re Include any Libraries that can not be build from source
+!libs/java-naoqi-sdk-2.5.6.5-win32-vs2013.jar
+
+# Log file
+*.log
+
+# Vim Swap Files
+*.swp
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
