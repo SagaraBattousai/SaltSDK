@@ -2,8 +2,12 @@ package com.github.sagarabattousai.saltsdk.samples
 
 import com.aldebaran.qi.Application
 import com.aldebaran.qi.Session
+import com.aldebaran.qi.helper.proxies.ALFaceCharacteristics
+import com.aldebaran.qi.helper.proxies.ALFaceDetection
+import com.aldebaran.qi.helper.proxies.ALLeds
 import com.aldebaran.qi.helper.proxies.ALTextToSpeech
 import com.github.sagarabattousai.saltsdk.events.FrontTactileTouched
+import com.github.sagarabattousai.saltsdk.events.HandRightBackTouched
 import com.github.sagarabattousai.saltsdk.events.RearTactileTouched
 import com.github.sagarabattousai.saltsdk.proxies.SaltMemory
 import com.github.sagarabattousai.saltsdk.utils.PEPPER_URI
@@ -13,12 +17,21 @@ import com.github.sagarabattousai.saltsdk.utils.PEPPER_URI
 class ReactToEvents {
     lateinit var memory: SaltMemory
     lateinit var tts: ALTextToSpeech
+    lateinit var fc: ALFaceCharacteristics
+    lateinit var fd: ALFaceDetection
+    lateinit var leds: ALLeds
+
+
     var frontTactilSubscriptionId: Long = 0
 
 
     fun run(session: Session) {
         memory = SaltMemory(session)
         tts = ALTextToSpeech(session)
+        fd = ALFaceDetection(session)
+        fc = ALFaceCharacteristics(session)
+        leds = ALLeds(session)
+
         frontTactilSubscriptionId = 0
 
         // Subscribe to FrontTactilTouched event,
@@ -26,7 +39,14 @@ class ReactToEvents {
         frontTactilSubscriptionId = memory.subscribeToEvent(
             FrontTactileTouched { touched ->
                 if (touched) {
-                    tts.say("ouch!")
+                    tts.say("That's my head!!")
+                    println(leds.listLEDs())
+                    leds.on("AllGreenLEDS")
+                    //fd.learnFace("James")
+                    //tts.say("I have Learnt your face")
+                    //(fd.learnedFacesList)
+                   // fc.analyzeFaceCharacteristics(1)
+
                 }
             })
 
