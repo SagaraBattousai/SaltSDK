@@ -13,5 +13,5 @@ fun main(args: Array<String>) {
     // Create an ALTextToSpeech object and link it to your current session
     val tts = ALTextToSpeech(application.session())
     // Make your robot say something
-    tts.say("Hello World!")
+    tts.say("Hello")
 }
